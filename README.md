@@ -255,6 +255,8 @@ gargantua/
 │   ├── make-ambient.mjs           氛围音轨生成器
 │   ├── probe.mjs                  诊断探针
 │   ├── hud-check.mjs              HUD 布局断言（双列 / 无重叠 / 控件计数 / 0 报错）
+│   ├── bench.mjs                  三档性能实测（等自适应分辨率稳定后采样）
+│   ├── verify-live.mjs            对已部署的线上地址做真实浏览器验证
 │   └── verify.mjs                 无头浏览器验证 + 截图
 └── docs/shots/                    验证截图与 JSON 报告
 ```
@@ -425,6 +427,8 @@ node scripts/verify.mjs --fast               # 快速：4 个用例
 node scripts/verify.mjs --mobile             # iPhone 视口 390×844 @DPR 3
 node scripts/verify.mjs --tag v9 --w 1920 --h 1080
 node scripts/hud-check.mjs                   # HUD 布局断言（1600×900）
+node scripts/bench.mjs                       # 三档性能实测
+node scripts/verify-live.mjs                 # 线上地址真实渲染验证
 ```
 
 结果写入 `docs/shots/<tag>-report.json`。
@@ -443,13 +447,53 @@ node scripts/hud-check.mjs                   # HUD 布局断言（1600×900）
 | 资源加载失败 | **0** |
 | 黑屏 | **否**（最终帧 mean ≈ 0.105，max ≈ 0.92，暗部 26.5%，暖色占比 7.6%） |
 | WebGL 后端 | WebGL2，ANGLE Metal，AMD Radeon Pro 560X（硬件，非 SwiftShader） |
-| 帧率 | Standard 档 1280×720 稳定 60 FPS（vsync 上限） |
+| 帧率 | 见下方 §10.1 实测表（1600×900 DPR1：Standard 44 FPS / High 24 FPS / Cinematic 9 FPS） |
 | 平均积分步数 | 由 16×16 同参数通道回读实测（HUD「平均步数」） |
 | 交互 | 键盘连击 + 拖拽旋转 + 滚轮缩放，114 帧正常推进，无报错 |
 | HUD 布局 | 双列、无区块重叠、控件计数正确 |
 
-视觉验证覆盖：4 个视角预设（经典 / 掠射 / 极地 / 长焦）、8 个调试视图、
-HUD 显隐、移动端竖屏视口、1080p 长焦。截图见 `docs/shots/`。
+### 10.1 性能实测
+
+`node scripts/bench.mjs` —— 1600×900、DPR 1、**自适应分辨率开启**（等它自己稳定后再采样，
+不是采第一帧），硬件为 AMD Radeon Pro 560X：
+
+| 质量档 | FPS | 帧时 | 实际积分分辨率 | 平均步数 | 每帧百万步样本 |
+|---|---|---|---|---|---|
+| Standard | 44 | 23 ms | 800×450 | 55 | 19.6 |
+| High | 24 | 42 ms | 992×558 | 73 | 40.3 |
+| Cinematic | 9 | 113 ms | 1120×630 | 101 | 71.3 |
+
+**怎么读这张表**：这是一个每像素要跑 55–101 次测地线迭代的 fragment shader，
+成本几乎线性于「像素数 × 步数」。上表的实际分辨率之所以低于各档标称比例，
+正是因为自适应控制器主动降分辨率去保帧率——它是在**做正确的事**，不是掉档。
+
+**给朋友的实话**：这块 2018 年的移动 GPU 上，High 档 24 FPS 属于「能看但拖拽不跟手」，
+Cinematic 基本只适合截图。弱显卡用户建议按 `Q` 切到 Standard，或者降低浏览器窗口尺寸
+（成本随像素数走）。HUD 里「积分分辨率」和「平均步数」两项就是给你判断当前开销用的。
+
+### 10.2 线上部署验证
+
+`node scripts/verify-live.mjs` 用真浏览器打开**已部署的 GitHub Pages 地址**，
+而不是只检查构建状态——构建绿了不代表页面真能跑：
+
+```
+target : https://edenleith620.github.io/gargantua/
+load   : 2640 ms          ready : true
+renderer: ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X)
+webgl2 : true             canvas: 1049×590
+pixels : mean 0.132  max 0.862  dark 19.4%  bright 17.4%  warm 12.4%
+hud    : true  presets: 4  params: 21
+frames : 52 -> 74         （按 Shift+3 换预设、按 0 回最终合成后仍在推进）
+```
+
+11 项断言全部 PASS：就绪标志、WebGL2、真实渲染器、非黑屏、暖色盘面存在、
+HUD 构建、4 预设 / 21 参数、帧循环推进、**0 控制台错误、0 失败请求**。
+线上截图见 `docs/shots/live-pages.png`。
+
+### 10.3 视觉验证覆盖
+
+4 个视角预设（经典 / 掠射 / 极地 / 长焦）、8 个调试视图、HUD 显隐、
+移动端竖屏视口、1080p 长焦。截图见 `docs/shots/`。
 
 关键构造成分在截图中均可直接确认：**深黑的视界盘面、横切阴影的光子环弧线、
 盘面上方的引力透镜一次像、阴影下方的二次/三次像、迎向侧约 16 倍的亮度不对称、
