@@ -1,5 +1,10 @@
 # GARGANTUA — Schwarzschild Black Hole Raytracer
 
+**▶ 在线试玩：<https://edenleith620.github.io/gargantua/>**
+
+直接把链接发给任何人就能玩，不需要安装任何东西——桌面 Chrome / Edge / Firefox / Safari
+均可，手机浏览器也能开（竖屏视场做过专门适配）。第一次打开需要几秒编译着色器。
+
 全屏实时交互网站。黑洞本体由**单个全屏 Fragment Shader 现场积分史瓦西零测地线**生成——
 没有黑球、没有平面圆环、没有贴图、没有视频、没有截图。屏幕上的每一个像素都是一条光子
 轨迹被真正求解出来的结果。
@@ -12,6 +17,13 @@
 
 ## 1. 启动
 
+### 1.1 最省事：在线地址
+
+<https://edenleith620.github.io/gargantua/> —— 托管在 GitHub Pages，打开即用，
+可以随便转发。这就是一个纯静态站点，没有后端、没有依赖服务。
+
+### 1.2 本地运行
+
 ES Modules 需要 HTTP 源（`file://` 会触发 CORS），因此需要一个静态服务器。项目自带一个
 零依赖的：
 
@@ -20,6 +32,9 @@ cd gargantua
 node scripts/serve.mjs          # 默认 8137 端口
 # 打开 http://127.0.0.1:8137/
 ```
+
+macOS 下也可以直接双击 `启动.command`：它会清掉占用端口的旧进程、起服务、
+并自动打开浏览器。
 
 指定端口 / 根目录：
 
@@ -37,6 +52,18 @@ php -S 127.0.0.1:8137
 
 **环境要求**：支持 WebGL2 的浏览器（Chrome / Edge / Firefox / Safari 16+）。
 需要 WebGL2 是因为 HDR 管线使用 `RGBA16F` 渲染目标；WebGL1 下会自动降级但仍可运行。
+
+> **注意**：本地地址 `127.0.0.1` 只对你自己这台机器有效，发给别人是打不开的。
+> 要分享就发上面的 GitHub Pages 地址。
+
+---
+
+## 1.3 分享给别人的两种方式
+
+| 想做什么 | 怎么做 |
+|---|---|
+| 直接让别人玩 | 发 <https://edenleith620.github.io/gargantua/> |
+| 改完之后更新线上版本 | `git add -A && git commit -m "..." && git push`，Pages 会在 1–2 分钟内自动重建 |
 
 ---
 
@@ -201,6 +228,8 @@ tanHalfFov = tan(fov/2) / aspect          (aspect < 1)
 gargantua/
 ├── index.html                     页面外壳 + importmap（"three" → vendor/three.module.js）
 ├── README.md
+├── 启动.command                   macOS 双击启动（清端口 → 起服务 → 开浏览器）
+├── .nojekyll                      GitHub Pages 下禁用 Jekyll 处理
 ├── css/
 │   └── style.css                  HUD、面板、覆盖层、响应式
 ├── js/
