@@ -2,30 +2,51 @@
 
 **▶ 在线试玩：<https://edenleith620.github.io/gargantua/>**
 
-直接把链接发给任何人就能玩，不需要安装任何东西——桌面 Chrome / Edge / Firefox / Safari
-均可，手机浏览器也能开（竖屏视场做过专门适配）。第一次打开需要几秒编译着色器。
+一句话：**这是一个在网页里实时运行的黑洞。** 屏幕上的每一个像素，都是一条光线在弯曲时空里
+被真正一步步求解出来的结果——不是贴图、不是视频、不是预先渲染好的动画。你转动鼠标，
+光线就重新算一遍。
 
-全屏实时交互网站。黑洞本体由**单个全屏 Fragment Shader 现场积分史瓦西零测地线**生成——
-没有黑球、没有平面圆环、没有贴图、没有视频、没有截图。屏幕上的每一个像素都是一条光子
-轨迹被真正求解出来的结果。
-
-原生 HTML / CSS / JavaScript + ES Modules，**无需构建**，`vendor/` 里只有一个
-`three.module.js`（加一个 `OrbitControls.js`），HDR Bloom / ACES / 色散 / 暗角 / 颗粒
-全部按 WebGLRenderTarget 手写，不依赖 `EffectComposer` 或任何后处理插件。
+打开即用，不用安装任何东西。桌面 Chrome / Edge / Firefox / Safari 16+ 都行，
+手机浏览器也能开（竖屏视场做过专门适配）。第一次打开要等几秒编译着色器，之后就是实时。
 
 ---
 
-## 1. 启动
+## 我该看哪一节
 
-### 1.1 最省事：在线地址
+| 你是…… | 去哪 |
+|---|---|
+| **只想玩** | 点上面的在线地址，操作见 [§1.1](#11-三十秒上手不用装任何东西) |
+| **想部署一份自己的**（改完自己发链接） | [§1.4 部署你自己的副本](#14-部署你自己的副本) |
+| 想调参数 / 换配色 / 解决卡顿 | [§4 参数表](#4-21-项参数) · [§7 质量档](#7-质量档) |
+| 想看它是怎么算出来的 | [§2 物理](#2-物理它是怎么算出来的) |
+| 想确认它没坏 / 想改代码 | [§3 文件结构](#3-文件结构) · [§10 测试与验证](#10-测试与验证结果) |
 
-<https://edenleith620.github.io/gargantua/> —— 托管在 GitHub Pages，打开即用，
-可以随便转发。这就是一个纯静态站点，没有后端、没有依赖服务。
+**先记住三件事**：① 它是纯静态网页，没有任何后端和密钥，**零配置**，扔到任何静态托管上都能跑；
+② 它需要 **WebGL2**（用了 `RGBA16F` 做 HDR）；③ **必须通过 HTTP 打开**，双击 `index.html`
+用 `file://` 协议会被浏览器 CORS 拦住——这是新手最容易踩的一个坑。
+
+---
+
+## 1. 启动与部署
+
+### 1.1 三十秒上手（不用装任何东西）
+
+1. 打开 <https://edenleith620.github.io/gargantua/>
+2. 等几秒（在编译着色器）
+3. **按住鼠标左键拖动** = 绕着黑洞转；**滚轮** = 拉近拉远
+
+就这些。想看点别的，记住四个键就够：
+
+| 键 | 效果 |
+|---|---|
+| `C` | 切「电影镜头」——镜头自己环绕着飞，适合当屏保看着发呆 |
+| `⇧1` `⇧2` `⇧3` `⇧4` | 四个机位：经典 / 掠射光环 / 极地俯视 / 深空长焦 |
+| `H` | 隐藏所有面板，只看画面 |
+| `?` | 弹出完整快捷键表（还有十几个） |
 
 ### 1.2 本地运行
 
-ES Modules 需要 HTTP 源（`file://` 会触发 CORS），因此需要一个静态服务器。项目自带一个
-零依赖的：
+ES Modules 需要 HTTP 源，所以起一个静态服务器就行。项目自带一个零依赖的：
 
 ```bash
 cd gargantua
@@ -33,41 +54,111 @@ node scripts/serve.mjs          # 默认 8137 端口
 # 打开 http://127.0.0.1:8137/
 ```
 
-macOS 下也可以直接双击 `启动.command`：它会清掉占用端口的旧进程、起服务、
+macOS 下也可以直接**双击 `启动.command`**：它会清掉占用端口的旧进程、起服务、
 并自动打开浏览器。
 
-指定端口 / 根目录：
+指定端口 / 根目录，或用任何等价的服务器：
 
 ```bash
 node scripts/serve.mjs 9000 .
-```
-
-任何等价方式都可以，例如：
-
-```bash
 python3 -m http.server 8137
 npx serve -l 8137
-php -S 127.0.0.1:8137
 ```
 
-**环境要求**：支持 WebGL2 的浏览器（Chrome / Edge / Firefox / Safari 16+）。
-需要 WebGL2 是因为 HDR 管线使用 `RGBA16F` 渲染目标；WebGL1 下会自动降级但仍可运行。
+> **注意**：`127.0.0.1` 只对你自己这台机器有效，发给别人是打不开的。
+> 要分享就发 GitHub Pages 地址，或者自己部署一份（下一节）。
 
-> **注意**：本地地址 `127.0.0.1` 只对你自己这台机器有效，发给别人是打不开的。
-> 要分享就发上面的 GitHub Pages 地址。
-
----
-
-## 1.3 分享给别人的两种方式
+### 1.3 分享给别人 / 更新线上版本
 
 | 想做什么 | 怎么做 |
 |---|---|
-| 直接让别人玩 | 发 <https://edenleith620.github.io/gargantua/> |
-| 改完之后更新线上版本 | `git add -A && git commit -m "..." && git push`，Pages 会在 1–2 分钟内自动重建 |
+| 让别人玩 | 发 <https://edenleith620.github.io/gargantua/> |
+| 更新线上版本 | `git add -A && git commit -m "..." && git push`，Pages 1–2 分钟自动重建 |
+| 换成自己的域名 | 仓库 Settings → Pages → Custom domain |
+
+### 1.4 部署你自己的副本
+
+**好消息：这个项目没有任何需要你改的配置。** 没有 API key、没有环境变量、没有后端地址、
+没有打包步骤——`index.html` / `css/` / `js/` / `vendor/` / `assets/` 这五个就是全部，
+扔到任何静态托管上都能跑。下面四种随便挑。
+
+#### 方式 A：GitHub Pages（免费，推荐，已实测可用）
+
+不需要命令行，全程点鼠标：
+
+1. 打开 <https://github.com/EdenLeith620/gargantua>，右上角点 **Fork** → **Create fork**
+2. 进你自己那个 fork，点 **Settings** → 左侧栏 **Pages**
+3. **Source** 选 `Deploy from a branch`；**Branch** 选 `main`，目录选 `/ (root)` → 点 **Save**
+4. 等 1–2 分钟，刷新这个 Pages 页面，顶部会出现你的地址：
+
+```
+https://<你的GitHub用户名>.github.io/gargantua/
+```
+
+一个坑：**如果仓库是 Private，这个地址打不开**。Fork 出来的默认是公开的，不用管；
+但如果你后来把自己的仓库改成 Private，需要升级到付费账号才能继续用 Pages。
+
+#### 方式 B：Vercel / Netlify（最省事，连账号就行）
+
+两个都有免费额度、都不需要构建配置：
+
+- **Netlify**：进 <https://app.netlify.com/drop>，把**整个 `gargantua` 文件夹拖进去**，
+  几秒后给你一个 `https://<随机名>.netlify.app` 地址。改完再拖一次就更新了。
+- **Vercel**：`Import Git Repository` 选你的 fork，Framework Preset 选 **Other**，
+  Build Command 和 Output Directory **都留空**，直接 Deploy。
+
+两者都是零配置——因为这个项目没有构建步骤。
+
+#### 方式 C：Cloudflare Pages
+
+`Create a project` → 连你的 GitHub fork → Framework preset 选 **None**，
+Build command 留空，Build output directory 填 `/`。免费，国内访问通常比前两家快。
+
+#### 方式 D：自己的服务器 / 给同事看
+
+它就是个静态目录，任何 Web 服务器指向它都行：
+
+```bash
+# 临时给同一个局域网的人看（把 <本机IP> 换成你的局域网地址）
+python3 -m http.server 8137 --bind 0.0.0.0
+# 别人访问 http://<本机IP>:8137/
+```
+
+```nginx
+# nginx
+location /gargantua/ {
+    alias /path/to/gargantua/;
+    index index.html;
+}
+```
+
+### 1.5 部署踩坑清单
+
+改代码或换平台之前扫一眼，能省你半小时：
+
+| 坑 | 说明 |
+|---|---|
+| **必须走 HTTP** | 双击 `index.html` 用 `file://` 打开会因 CORS 直接白屏。**必须**用静态服务器或在线托管 |
+| **路径大小写** | GitHub Pages / Cloudflare / nginx 都**区分大小写**，而 macOS 和 Windows 默认不区分。在本地跑得好好的，传上去可能 `404`——检查 `OrbitControls.js` 这类带大写的引用 |
+| **以 `_` 开头的文件** | GitHub Pages 默认跑 Jekyll，会**忽略** `_` 开头的文件/目录。本项目已放 `.nojekyll` 规避 |
+| **需要 WebGL2** | 老浏览器 / 关闭了硬件加速的浏览器会提示降级。HDR 管线依赖 `RGBA16F` |
+| **手机能开但会烫** | 移动端自动降到 Standard 档并自适应降分辨率，长时间观看手机会发热 |
+| **不是所有设备都流畅** | 这是每像素 55–101 次迭代的计算着色器，弱显卡建议按 `Q` 切 Standard。实测数据见 [§10.1](#101-性能实测) |
+
+> 顺带一提：仓库里的 `scripts/` 是**开发用的验证脚本**（Node 跑），部署时完全不需要它们，
+> 也不影响站点运行。可以整套删掉，页面照样工作。
 
 ---
 
 ## 2. 物理：它是怎么算出来的
+
+黑洞本体由**单个全屏 Fragment Shader 现场积分史瓦西零测地线**生成——没有黑球、
+没有平面圆环、没有贴图、没有视频、没有截图。屏幕上的每一个像素都是一条光子轨迹被真正
+求解出来的结果。
+
+实现是原生 HTML / CSS / JavaScript + ES Modules，**无需构建**，`vendor/` 里只有一个
+`three.module.js`（加一个 `OrbitControls.js`），HDR Bloom / ACES / 色散 / 暗角 / 颗粒
+全部按 WebGLRenderTarget 手写，不依赖 `EffectComposer` 或任何后处理插件。
 
 ### 2.1 测地线方程
 
