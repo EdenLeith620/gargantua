@@ -1,0 +1,89 @@
+{
+  "tag": "cine",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "results": [
+    {
+      "name": "final",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.10508217158072435,
+        "max": 0.9221192156862744,
+        "darkFrac": 0.2745679012345679,
+        "brightFrac": 0.11549382716049383,
+        "hotFrac": 0.07861111111111112,
+        "centreMean": 0.15518046437222907
+      },
+      "renderSize": [
+        960,
+        540
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "shadow",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.12010372418299822,
+        "max": 0.7526423529411763,
+        "darkFrac": 0.24962962962962962,
+        "brightFrac": 0.14888888888888888,
+        "hotFrac": 0.1025,
+        "centreMean": 0.18846733305909769
+      },
+      "renderSize": [
+        960,
+        540
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "debug-disk",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.07652216729605324,
+        "max": 0.9263239215686275,
+        "darkFrac": 0.6335185185185185,
+        "brightFrac": 0.10953703703703704,
+        "hotFrac": 0.07317901234567901,
+        "centreMean": 0.13419987110928303
+      },
+      "renderSize": [
+        1056,
+        594
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "sky",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.04457232488501145,
+        "max": 0.9034917647058823,
+        "darkFrac": 0.48225308641975306,
+        "brightFrac": 0.007932098765432098,
+        "hotFrac": 0.005308641975308642,
+        "centreMean": 0.04767162393162402
+      },
+      "renderSize": [
+        1056,
+        594
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "interaction",
+      "failed": false,
+      "errors": [],
+      "stats": null,
+      "renderSize": null,
+      "renderer": null
+    }
+  ]
+}

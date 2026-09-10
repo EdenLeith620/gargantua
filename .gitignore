@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+._*
+
+# Node (only playwright-core is ever installed, and only for the verify scripts)
+node_modules/
+package-lock.json
+npm-debug.log*
+
+# Local run artefacts
+*.log

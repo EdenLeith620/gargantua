@@ -1,0 +1,53 @@
+{
+  "tag": "mobile",
+  "viewport": [
+    390,
+    844
+  ],
+  "results": [
+    {
+      "name": "mobile-final",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.08566485757554018,
+        "max": 0.9106376470588236,
+        "darkFrac": 0.37448619139370587,
+        "brightFrac": 0.07255138086062941,
+        "hotFrac": 0.04343288375080283,
+        "centreMean": 0.12902140151787214
+      },
+      "renderSize": [
+        214,
+        464
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "mobile-pole",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.07757542382284316,
+        "max": 0.8671435294117646,
+        "darkFrac": 0.6192437379576108,
+        "brightFrac": 0.11378452151573538,
+        "hotFrac": 0.09039820166987797,
+        "centreMean": 0.1334594043429361
+      },
+      "renderSize": [
+        214,
+        464
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "interaction",
+      "failed": false,
+      "errors": [],
+      "stats": null,
+      "renderSize": null,
+      "renderer": null
+    }
+  ]
+}

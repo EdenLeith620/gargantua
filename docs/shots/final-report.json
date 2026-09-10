@@ -1,0 +1,215 @@
+{
+  "tag": "final",
+  "viewport": [
+    1280,
+    720
+  ],
+  "results": [
+    {
+      "name": "final",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.10525085531347761,
+        "max": 0.9184807843137254,
+        "darkFrac": 0.2653395061728395,
+        "brightFrac": 0.11262345679012346,
+        "hotFrac": 0.07592592592592592,
+        "centreMean": 0.1588821271538919
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "preset-edge",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.1205584121035984,
+        "max": 0.7749717647058824,
+        "darkFrac": 0.24950617283950619,
+        "brightFrac": 0.1464814814814815,
+        "hotFrac": 0.09601851851851852,
+        "centreMean": 0.18887348233465873
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "preset-pole",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.09147254241103081,
+        "max": 0.8816611764705882,
+        "darkFrac": 0.5563271604938271,
+        "brightFrac": 0.13367283950617284,
+        "hotFrac": 0.10580246913580246,
+        "centreMean": 0.07722813474107597
+      },
+      "renderSize": [
+        1088,
+        612
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "preset-tele",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.14584445071411747,
+        "max": 0.9535074509803921,
+        "darkFrac": 0.2069135802469136,
+        "brightFrac": 0.1970679012345679,
+        "hotFrac": 0.11123456790123457,
+        "centreMean": 0.12784607157548336
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "debug-steps",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.4592957688211242,
+        "max": 0.8226674509803921,
+        "darkFrac": 0,
+        "brightFrac": 0.9093518518518519,
+        "hotFrac": 0,
+        "centreMean": 0.36924861373920465
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "debug-disk",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.0765421960058094,
+        "max": 0.9184807843137254,
+        "darkFrac": 0.6298456790123457,
+        "brightFrac": 0.10722222222222222,
+        "hotFrac": 0.07191358024691358,
+        "centreMean": 0.13869735819735843
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "debug-doppler",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.1173193772694745,
+        "max": 0.482361568627451,
+        "darkFrac": 0,
+        "brightFrac": 0.15799382716049382,
+        "hotFrac": 0.1037037037037037,
+        "centreMean": 0.10459110471228114
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "debug-redshift",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.8468000552169841,
+        "max": 0.8692956862745098,
+        "darkFrac": 0,
+        "brightFrac": 1,
+        "hotFrac": 0.994537037037037,
+        "centreMean": 0.8279955528131954
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "debug-sky",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.045306502856447106,
+        "max": 0.9071615686274509,
+        "darkFrac": 0.4690432098765432,
+        "brightFrac": 0.007746913580246913,
+        "hotFrac": 0.00537037037037037,
+        "centreMean": 0.048415648795648906
+      },
+      "renderSize": [
+        1088,
+        612
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "debug-deflect",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.3101736289275654,
+        "max": 0.8516188235294117,
+        "darkFrac": 0,
+        "brightFrac": 0.789537037037037,
+        "hotFrac": 0.012160493827160494,
+        "centreMean": 0.10657757118698297
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "hud",
+      "failed": false,
+      "errors": [],
+      "stats": {
+        "mean": 0.10525085531347761,
+        "max": 0.9184807843137254,
+        "darkFrac": 0.2653395061728395,
+        "brightFrac": 0.11262345679012346,
+        "hotFrac": 0.07592592592592592,
+        "centreMean": 0.1588821271538919
+      },
+      "renderSize": [
+        990,
+        556
+      ],
+      "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)"
+    },
+    {
+      "name": "interaction",
+      "failed": false,
+      "errors": [],
+      "stats": null,
+      "renderSize": null,
+      "renderer": null
+    }
+  ]
+}
